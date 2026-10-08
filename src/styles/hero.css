@@ -1,0 +1,67 @@
+/* ==========================================================
+   hero.css — необов'язковий банер (нічний ліс і туман).
+   Класи: .hero, .heroContent, .heroTitle, .heroText
+   ========================================================== */
+.hero {
+  --pines-far: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='140' viewBox='0 0 220 140'><defs><path id='p' d='M0 -60 14 -28 7 -28 19 -2 9 -2 24 28 -24 28 -9 -2 -19 -2 -7 -28 -14 -28Z'/></defs><g fill='%23171210'><use href='%23p' transform='translate(30 100) scale(1.1)'/><use href='%23p' transform='translate(88 112) scale(.85)'/><use href='%23p' transform='translate(140 96) scale(1.25)'/><use href='%23p' transform='translate(196 110) scale(.95)'/></g></svg>");
+  --pines-near: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='140' viewBox='0 0 300 140'><defs><path id='p' d='M0 -60 14 -28 7 -28 19 -2 9 -2 24 28 -24 28 -9 -2 -19 -2 -7 -28 -14 -28Z'/></defs><g fill='%23090706'><use href='%23p' transform='translate(30 108) scale(1.3)'/><use href='%23p' transform='translate(95 118) scale(.9)'/><use href='%23p' transform='translate(150 104) scale(1.5)'/><use href='%23p' transform='translate(215 116) scale(1)'/><use href='%23p' transform='translate(268 106) scale(1.25)'/></g></svg>");
+
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  width: 100vw;
+  margin: calc(-1 * var(--main-pad)) calc(50% - 50vw) 1.5rem;
+  min-height: clamp(17rem, 46vh, 28rem);
+  padding: 3rem 1.25rem 7rem;
+  text-align: center;
+  overflow: hidden;
+  border-bottom: 3px solid #0a0806;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), inset 0 -1px 0 var(--line-hi);
+  background:
+    radial-gradient(circle at 78% 22%, rgba(183, 162, 125, 0.16) 0, rgba(183, 162, 125, 0.05) 9rem, transparent 18rem),
+    linear-gradient(180deg, #0b0908 0%, #15110d 60%, #0d0b09 100%);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 62%;
+  z-index: -1;
+  background:
+    var(--pines-far) repeat-x 40px bottom / 220px auto,
+    var(--pines-near) repeat-x bottom / 300px auto;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 200%;
+  height: 70%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 25% 70%, rgba(183, 162, 125, 0.1), transparent 55%),
+    radial-gradient(ellipse at 75% 80%, rgba(183, 162, 125, 0.08), transparent 50%);
+  background-size: 50% 100%;
+  background-repeat: repeat-x;
+  animation: fogDrift 80s linear infinite;
+}
+.heroContent { display: grid; gap: 1rem; max-width: 42rem; }
+.heroTitle {
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-size: clamp(2rem, 6.5vw, 4rem);
+  line-height: 1.08;
+  color: var(--text);
+  text-shadow: 0 3px 0 #000;
+}
+.heroText {
+  max-width: 34rem;
+  margin-inline: auto;
+  font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+  font-style: italic;
+  color: var(--text-dim);
+  text-shadow: 0 1px 6px #000;
+}

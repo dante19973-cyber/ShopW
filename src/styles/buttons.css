@@ -1,0 +1,112 @@
+/* ==========================================================
+   buttons.css — «металеві таблички»: темне дерево, тонка рамка,
+   світлий текст, при hover — тепле червоне підсвічування.
+   .buttonBuy (До кошика / Оформити), .buttonCancel (Скинути / Скасувати)
+   ========================================================== */
+
+/* .buttonBuy — темна дерев'яна табличка */
+.buttonBuy {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: auto;
+  padding: 0.6rem 1rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  text-shadow: 0 1px 0 #000;
+  background: var(--grain), linear-gradient(180deg, #3b2a1c 0%, #2a1d14 55%, #1f1610 100%);
+  border: 1px solid var(--line-hi);
+  border-radius: 1px;
+  box-shadow:
+    inset 0 1px 0 rgba(212, 197, 165, 0.12),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.55),
+    0 2px 5px rgba(0, 0, 0, 0.6);
+  transition: color 0.2s, border-color 0.2s, box-shadow 0.25s, background 0.2s;
+}
+/* тонка внутрішня лінія */
+.buttonBuy::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border: 1px solid rgba(183, 162, 125, 0.22);
+  pointer-events: none;
+}
+/* іконка візка тільки на кнопках карток */
+.conteiner .buttonBuy::after {
+  content: "";
+  order: -1;
+  width: 1.1em;
+  height: 1.1em;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M1.5 2.5h2l1.5 7.5h7.2l1.4-5.5H4.2'/><circle cx='6' cy='13' r='1.1'/><circle cx='11.5' cy='13' r='1.1'/></svg>") center / contain no-repeat;
+          mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M1.5 2.5h2l1.5 7.5h7.2l1.4-5.5H4.2'/><circle cx='6' cy='13' r='1.1'/><circle cx='11.5' cy='13' r='1.1'/></svg>") center / contain no-repeat;
+}
+.buttonBuy:hover {
+  color: #ead9bb;
+  border-color: var(--red-hi);
+  background: var(--grain), linear-gradient(180deg, #5a2019 0%, #3a1410 60%, #2a0e0b 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(212, 197, 165, 0.14),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.55),
+    0 2px 5px rgba(0, 0, 0, 0.6),
+    0 0 10px rgba(125, 33, 27, 0.45);
+}
+.buttonBuy:active { transform: translateY(1px); box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.75); }
+
+/* головні дії в кошику й вікні замовлення — бордові */
+.basket .buttonBuy,
+.modal .buttonBuy {
+  background: var(--grain), linear-gradient(180deg, var(--red) 0%, var(--red-dark) 100%);
+  border-color: var(--red-hi);
+}
+.basket .buttonBuy:hover,
+.modal .buttonBuy:hover {
+  background: var(--grain), linear-gradient(180deg, var(--red-hi) 0%, var(--red) 100%);
+}
+
+/* .buttonCancel — темний метал */
+.buttonCancel {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.55rem 1rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  text-shadow: 0 1px 0 #000;
+  background: var(--grain), linear-gradient(180deg, #4a453d 0%, #332f2a 55%, #25221f 100%);
+  border: 1px solid #0a0806;
+  border-radius: 1px;
+  box-shadow:
+    inset 0 1px 0 rgba(212, 197, 165, 0.16),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.5),
+    0 2px 5px rgba(0, 0, 0, 0.55);
+  transition: color 0.2s, border-color 0.2s, box-shadow 0.25s;
+}
+.buttonCancel:hover {
+  color: #ead9bb;
+  border-color: var(--red-hi);
+  box-shadow:
+    inset 0 1px 0 rgba(212, 197, 165, 0.16),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.5),
+    0 0 10px rgba(125, 33, 27, 0.4);
+}
+.buttonCancel:active { transform: translateY(1px); }
+
+/* стан «відправляється» */
+.buttonBuy:disabled,
+.buttonCancel:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}

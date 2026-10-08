@@ -1,0 +1,31 @@
+/* ==========================================================
+   footer.css — кам'яно-дерев'яний низ сторінки з рунами
+   Класи: .footer, .footerRunes, .footerText
+   ========================================================== */
+.footer {
+  position: relative;
+  margin-top: 3rem;
+  padding: 2.25rem 1rem 2rem;
+  text-align: center;
+  color: var(--text-dim);
+  background: var(--noise), linear-gradient(180deg, var(--wood-mid), var(--bg-black));
+  border-top: 3px solid var(--bronze);
+  box-shadow: inset 0 3px 0 rgba(226, 194, 90, 0.18), 0 -8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.footerRunes {
+  font-family: "Noto Sans Runic", "Segoe UI Historic", "Segoe UI Symbol", serif;
+  font-size: 1.35rem;
+  letter-spacing: 0.7em;
+  margin-right: -0.7em; /* компенсує відступ після останньої руни */
+  color: var(--gold);
+  opacity: 0.75;
+  text-shadow: 0 0 12px rgba(201, 162, 39, 0.4);
+}
+
+.footerText {
+  margin-top: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+}

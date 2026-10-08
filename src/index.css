@@ -1,0 +1,20 @@
+/* ==========================================================
+   index.css — точка входу (у main.jsx вже є: import './index.css')
+   Порядок важливий: токени → база → розкладка → компоненти.
+   Шрифти: Cinzel + MedievalSharp (латиниця), Forum (кирилиця
+   в тому ж римському стилі), EB Garamond (основний текст).
+   ========================================================== */
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Forum&family=MedievalSharp&display=swap");
+
+@import "./styles/variables.css";
+@import "./styles/base.css";
+@import "./styles/layout.css";
+@import "./styles/header.css";
+@import "./styles/hero.css";
+@import "./styles/footer.css";
+@import "./styles/filter.css";
+@import "./styles/products.css";
+@import "./styles/buttons.css";
+@import "./styles/basket.css";
+@import "./styles/modal.css";
+@import "./styles/animations.css";

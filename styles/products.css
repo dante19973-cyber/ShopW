@@ -1,0 +1,196 @@
+/* ==========================================================
+   products.css — сітки, картки-сторінки бестіарію, сети
+   Класи: .productL, .products-grid, .no-products, .conteiner,
+   .name, .rarity, .characteristics, .prise, .oldPrise,
+   .setConteiner, .setItems, .setItem
+   ========================================================== */
+
+/* .productL — сітка звичайних товарів (List.jsx) */
+.productL {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(16.5rem, 100%), 1fr));
+}
+
+/* .products-grid — сітка сетів (Sets.jsx), картки ширші */
+.products-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(21rem, 100%), 1fr));
+}
+
+/* .no-products — порожній список */
+.no-products {
+  padding: 2.5rem 1rem;
+  text-align: center;
+  font-style: italic;
+  color: var(--text-dim);
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px dashed rgba(139, 105, 20, 0.5);
+  border-radius: 4px;
+}
+
+/* .conteiner — картка товару, сторінка бестіарію */
+.conteiner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 1.1rem 1.1rem 1.25rem;
+  background: var(--noise), linear-gradient(160deg, #2b2218 0%, #1d1710 60%, #15110d 100%);
+  border: 1px solid rgba(139, 105, 20, 0.55);
+  border-radius: 3px 8px 4px 9px / 8px 4px 9px 3px;
+  box-shadow: inset 0 0 28px rgba(0, 0, 0, 0.65), 0 8px 18px rgba(0, 0, 0, 0.6);
+  transition: transform 0.25s var(--ease), box-shadow 0.25s, border-color 0.25s;
+}
+/* внутрішня рамка, як на сторінці з гравюрою */
+.conteiner::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(201, 162, 39, 0.22);
+  border-radius: 2px;
+  pointer-events: none;
+}
+.conteiner:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+  box-shadow:
+    inset 0 0 28px rgba(0, 0, 0, 0.65),
+    0 14px 26px rgba(0, 0, 0, 0.7),
+    0 0 20px rgba(201, 162, 39, 0.25);
+}
+
+/* .name — назва товару */
+.name {
+  text-align: center;
+}
+.name h2 {
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+  text-shadow: 0 1px 0 #000;
+}
+.name::after {
+  content: "";
+  display: block;
+  height: 1px;
+  margin-top: 0.6rem;
+  background: linear-gradient(90deg, transparent, var(--bronze), transparent);
+}
+
+/* ілюстрація на пергаментній пластині (тільки головне зображення картки) */
+.conteiner > img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  padding: 0.5rem;
+  background: var(--noise), linear-gradient(145deg, var(--parchment), var(--parchment-deep));
+  border: 2px solid var(--bronze);
+  border-radius: 2px;
+  box-shadow: inset 0 0 18px rgba(92, 58, 20, 0.55);
+  filter: sepia(0.2) contrast(1.05);
+}
+
+/* тип предмета (h3) */
+.conteiner h3 {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-style: italic;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: var(--text-dim);
+}
+
+/* .rarity — табличка рідкості */
+.rarity {
+  align-self: center;
+  padding: 0.15rem 0.9rem;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  color: var(--parchment);
+  background: rgba(139, 105, 20, 0.15);
+  border: 1px solid var(--bronze);
+  border-radius: 2px;
+}
+/* необов'язково: кольори рідкості, якщо додасте клас rarity-{{значення}} в Container.jsx */
+.rarity-Common { color: var(--parchment); }
+.rarity-Rare { color: #8fb3c9; border-color: #4f6f84; }
+.rarity-Epic { color: #b79ad1; border-color: #6b5483; }
+.rarity-Legendary { color: var(--gold-bright); border-color: var(--gold); }
+
+/* .characteristics — опис */
+.characteristics {
+  padding: 0.45rem 0.2rem;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--text);
+  border-block: 1px dashed rgba(139, 105, 20, 0.4);
+}
+
+/* .prise — ціна з монетою */
+.prise {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-align: center;
+  color: var(--gold);
+}
+.prise::before {
+  content: "";
+  display: inline-block;
+  width: 0.8em;
+  height: 0.8em;
+  margin-right: 0.45em;
+  vertical-align: -0.05em;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f1d77a, var(--gold) 45%, var(--bronze));
+  box-shadow: 0 0 0 1px #000, 0 0 8px rgba(201, 162, 39, 0.4);
+}
+
+/* .oldPrise — стара ціна сету (перекреслена) */
+.oldPrise {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+}
+.oldPrise s { text-decoration-color: var(--blood-bright); text-decoration-thickness: 2px; }
+
+/* .setConteiner — картка сету (додається до .conteiner) */
+.setConteiner { gap: 0.8rem; }
+
+/* .setItems — речі сету на дошці */
+.setItems {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+/* .setItem — одна річ у сеті */
+.setItem {
+  display: grid;
+  gap: 0.25rem;
+  align-content: start;
+  padding: 0.4rem;
+  font-size: 0.82rem;
+  line-height: 1.25;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(212, 197, 169, 0.12), rgba(212, 197, 169, 0.04));
+  border: 1px solid rgba(139, 105, 20, 0.4);
+  border-radius: 2px;
+}
+.setItem img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  padding: 0.2rem;
+  background: linear-gradient(145deg, var(--parchment), var(--parchment-deep));
+  border: 1px solid var(--bronze);
+}
+.setItem p:last-child {
+  font-family: var(--font-display);
+  color: var(--gold);
+}

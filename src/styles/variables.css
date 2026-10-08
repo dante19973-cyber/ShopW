@@ -1,0 +1,56 @@
+/* ==========================================================
+   variables.css — палітра з референсу: майже чорний, темне
+   дерево, старий пергамент, бордовий. Золото — лише дрібний акцент.
+   ========================================================== */
+:root {
+  /* Фони */
+  --bg-black: #100e0c;
+  --bg-brown: #1b1510;
+  --wood: #2a1d14;
+  --wood-hi: #3a2a1d;
+  --wood-lo: #17110c;
+
+  /* Пергамент і чорнило (на картках) */
+  --parchment: #b7a27d;
+  --parchment-hi: #c8b48e;
+  --parchment-lo: #9a845c;
+  --ink: #2a1d12;
+  --ink-soft: #3e2f1f;
+
+  /* Текст на темному */
+  --text: #d4c5a5;
+  --text-dim: #91836a;
+
+  /* Червоні акценти */
+  --red-dark: #641b16;
+  --red: #7d211b;
+  --red-hi: #9a2f27;
+  --red-text: #d8806f;      /* червоний, що читається на темному фоні */
+
+  /* Старе золото — тільки маленькі деталі (монета, зірочки-ромби) */
+  --gold: #a38a4c;
+  --gold-dim: #7a6638;
+
+  /* Темний метал і лінії-рамки */
+  --metal: #3b3732;
+  --metal-hi: #5a554c;
+  --metal-lo: #25221f;
+  --line: #4a3626;
+  --line-hi: #6b5238;
+
+  /* Шрифти: кирилиця автоматично береться з Forum */
+  --font-title: "MedievalSharp", "Forum", Georgia, serif;
+  --font-display: "Cinzel", "Forum", Georgia, serif;
+  --font-body: "EB Garamond", "Palatino Linotype", Georgia, serif;
+
+  /* Розміри й рух */
+  --main-pad: clamp(1rem, 3vw, 2.5rem);
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* Дуже слабке зерно: світле для дерева, темне для пергаменту */
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .85  0 0 0 0 .72  0 0 0 0 .5  0 0 0 .07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .16  0 0 0 0 .1  0 0 0 0 .04  0 0 0 .32 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+
+  /* Медальйон-вовк: сталь і червоні очі */
+  --medallion: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%231a1512' stroke='%23857d70' stroke-width='3'/><circle cx='32' cy='32' r='25' fill='none' stroke='%234a443b' stroke-width='1.4'/><path d='M14 14 25 26H39L50 14 49 36 38 51 32 56 26 51 15 36Z' fill='%23a8a398'/><path d='M22 33 29 35.5M42 33 35 35.5' stroke='%23a3231c' stroke-width='3' stroke-linecap='round'/></svg>");
+}

@@ -1,0 +1,44 @@
+/* ==========================================================
+   animations.css — стримана поява елементів. fill-mode «backwards»:
+   після завершення анімація знімається, тому hover (підйом карток)
+   працює. Без свічення й блиску.
+   ========================================================== */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes slideInRight { from { transform: translateX(100%); } to { transform: none; } }
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.96) translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes fogDrift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.heroContent { animation: fadeUp 0.8s var(--ease) backwards; }
+.Category > h1 { animation: fadeIn 0.6s ease backwards; }
+.filter { animation: fadeUp 0.5s var(--ease) 0.05s backwards; }
+
+/* картки з'являються по черзі */
+.conteiner { animation: fadeUp 0.5s var(--ease) 0.4s backwards; }
+.conteiner:nth-child(1) { animation-delay: 0.05s; }
+.conteiner:nth-child(2) { animation-delay: 0.1s; }
+.conteiner:nth-child(3) { animation-delay: 0.15s; }
+.conteiner:nth-child(4) { animation-delay: 0.2s; }
+.conteiner:nth-child(5) { animation-delay: 0.25s; }
+.conteiner:nth-child(6) { animation-delay: 0.3s; }
+
+.basket { animation: fadeUp 0.5s var(--ease) 0.15s backwards; }
+@media (max-width: 1024px) {
+  .basket.basketOpen { animation: slideInRight 0.3s var(--ease) backwards; }
+}
+.overlay { animation: fadeIn 0.2s ease backwards; }
+.modal { animation: popIn 0.25s var(--ease) backwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

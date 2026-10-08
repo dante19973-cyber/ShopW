@@ -1,0 +1,130 @@
+/* ==========================================================
+   header.css — темна дерев'яна панель: логотип і назва зліва,
+   навігація по категоріях (.nav), «Кошик (N)» справа (.basketToggle).
+   До 1279px навігація стоїть другим рядком, від 1280px — в одному
+   рядку з логотипом.
+   Класи: header, header h1, header nav, .nav, .nav a, .active
+   ========================================================== */
+header {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: center;
+  padding: 0.9rem 1rem 1rem;
+  background-color: var(--wood-lo);
+  background-image:
+    var(--grain),
+    repeating-linear-gradient(91deg, rgba(0, 0, 0, 0.32) 0 1px, transparent 1px 12px),
+    repeating-linear-gradient(89deg, rgba(212, 197, 165, 0.03) 0 2px, transparent 2px 19px),
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0 2px, transparent 2px 220px),
+    linear-gradient(180deg, #2b1e15, #1a130e 70%, #120d09);
+  border-bottom: 3px solid #0a0806;
+  box-shadow:
+    inset 0 -1px 0 var(--line-hi),
+    inset 0 1px 0 rgba(212, 197, 165, 0.08),
+    0 8px 20px rgba(0, 0, 0, 0.7);
+}
+
+/* header h1 — медальйон + назва + червона лінія з ромбом */
+header h1 {
+  display: inline-grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 0.9rem;
+  align-items: center;
+  justify-self: start;
+  max-width: 17rem;
+  padding-right: 6.5rem;               /* місце під кнопку кошика на малих екранах */
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 5vw, 2.1rem);
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  text-wrap: balance;
+  color: var(--text);
+  text-shadow: 0 2px 0 #000;
+}
+header h1::before {
+  content: "";
+  grid-row: span 2;
+  width: 3.4rem;
+  height: 3.4rem;
+  background: var(--medallion) center / contain no-repeat;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.8));
+}
+header h1::after {
+  content: "";
+  grid-column: 2;
+  align-self: start;
+  height: 9px;
+  margin-top: 0.35rem;
+  background: linear-gradient(90deg, transparent, var(--red-hi) 18%, var(--red-hi) 82%, transparent);
+  clip-path: polygon(
+    0 calc(50% - 0.5px), 45% calc(50% - 0.5px), 50% 0, 55% calc(50% - 0.5px),
+    100% calc(50% - 0.5px), 100% calc(50% + 0.5px), 55% calc(50% + 0.5px),
+    50% 100%, 45% calc(50% + 0.5px), 0 calc(50% + 0.5px)
+  );
+}
+
+/* header nav / .nav — меню категорій: на телефоні гортається вбік */
+.nav {
+  display: flex;
+  gap: 0.15rem;
+  padding: 0.15rem 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-top: 1px solid rgba(183, 162, 125, 0.14);
+}
+.nav::-webkit-scrollbar { display: none; }
+.nav li { flex: none; }
+
+.nav a {
+  display: block;
+  padding: 0.55rem 0.95rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  text-shadow: 0 1px 0 #000;
+  border: 1px solid transparent;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+.nav a:hover {
+  color: #ead9bb;
+  background: rgba(125, 33, 27, 0.25);
+}
+/* активний пункт — бордовий, як було заплановано в референсі */
+.nav a.active {
+  color: #ead9bb;
+  background: linear-gradient(180deg, var(--red), var(--red-dark));
+  border-color: var(--red-hi);
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 767px) {
+  /* затухання справа підказує, що меню гортається */
+  .nav { mask-image: linear-gradient(90deg, #000 88%, transparent); }
+}
+
+/* Від 768px: шапка трохи ширша, меню по центру й переноситься */
+@media (min-width: 768px) {
+  header { padding: 1rem 2rem 0.7rem; }
+  header h1 { padding-right: 0; }
+  .nav { flex-wrap: wrap; justify-content: center; overflow: visible; }
+  .nav li + li { border-left: 1px solid rgba(183, 162, 125, 0.16); }
+}
+
+@media (min-width: 1025px) {
+  header h1::before { width: 4.4rem; height: 4.4rem; }
+}
+
+/* Від 1280px: логотип і меню в одному рядку, праворуч місце під «Кошик» */
+@media (min-width: 1280px) {
+  header {
+    grid-template-columns: max-content minmax(0, 1fr);
+    column-gap: 2rem;
+    padding: 1rem 10rem 1rem 2rem;
+  }
+  .nav { border-top: 0; }
+}

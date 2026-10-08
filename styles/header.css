@@ -1,0 +1,107 @@
+/* ==========================================================
+   header.css — шапка-балка з дерева, логотип, навігація
+   Класи: header, header h1, header nav, .nav, .nav li, .nav a
+   ========================================================== */
+
+/* header — дерев'яна балка із цвяхами */
+header {
+  position: relative;
+  padding: 0.9rem 1rem 0.6rem;
+  text-align: center;
+  background-color: var(--wood-mid);
+  background-image:
+    var(--noise),
+    repeating-linear-gradient(91deg, rgba(0, 0, 0, 0.28) 0 1px, transparent 1px 11px),
+    repeating-linear-gradient(89deg, rgba(255, 214, 140, 0.05) 0 2px, transparent 2px 17px),
+    linear-gradient(180deg, var(--wood-light), var(--wood-mid) 60%, var(--wood-dark));
+  border-bottom: 3px solid var(--bronze);
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.75),
+    inset 0 -2px 0 rgba(226, 194, 90, 0.25),
+    inset 0 2px 0 rgba(255, 214, 140, 0.08);
+}
+header::before,
+header::after {
+  content: "";
+  position: absolute;
+  top: 0.55rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #8a8f86, #3b3f39 55%, #15170f);
+  box-shadow: 0 1px 2px #000;
+}
+header::before { left: 0.7rem; }
+header::after { right: 0.7rem; }
+
+/* header h1 — логотип з медальйоном */
+header h1 {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 5.5vw, 2.7rem);
+  letter-spacing: 0.05em;
+  color: var(--parchment);
+  text-shadow: 0 2px 0 #000, 0 0 20px rgba(201, 162, 39, 0.35);
+}
+header h1::before {
+  content: "";
+  flex: none;
+  width: 1.35em;
+  height: 1.35em;
+  background: var(--medallion) center / contain no-repeat;
+  filter: drop-shadow(0 0 6px rgba(201, 162, 39, 0.45));
+}
+
+header nav { margin-top: 0.5rem; }
+
+/* .nav — на телефоні гортається вбік, на десктопі центрується */
+.nav {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.25rem 0 0.35rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav::-webkit-scrollbar { display: none; }
+
+.nav li { flex: none; }
+
+/* .nav a — посилання (NavLink додає клас .active) */
+.nav a {
+  display: block;
+  padding: 0.5rem 0.95rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  border-radius: 2px;
+  transition: color 0.2s, text-shadow 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+.nav a:hover {
+  color: var(--gold-bright);
+  text-shadow: 0 0 12px rgba(226, 194, 90, 0.55);
+  background: rgba(0, 0, 0, 0.25);
+}
+.nav a.active {
+  color: var(--gold);
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: inset 0 -2px 0 var(--gold), inset 0 0 14px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 48rem) {
+  .nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: visible;
+  }
+  .nav li + li { border-left: 1px solid rgba(139, 105, 20, 0.35); }
+}
+
+/* місце під монету-кошик справа */
+@media (min-width: 62rem) {
+  header { padding-inline: 6rem; }
+}

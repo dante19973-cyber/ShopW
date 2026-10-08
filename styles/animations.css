@@ -1,0 +1,45 @@
+/* ==========================================================
+   animations.css — поява елементів, висування кошика, туман
+   fill-mode «backwards»: після завершення анімація знімається,
+   тому hover-ефекти (підйом карток) продовжують працювати.
+   ========================================================== */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes slideInRight { from { transform: translateX(100%); } to { transform: none; } }
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.94) translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes fogDrift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.heroContent { animation: fadeUp 0.9s var(--ease) backwards; }
+.Category > h1 { animation: fadeIn 0.7s ease backwards; }
+.filter { animation: fadeUp 0.6s var(--ease) 0.1s backwards; }
+
+/* картки з'являються по черзі */
+.conteiner { animation: fadeUp 0.6s var(--ease) 0.45s backwards; }
+.conteiner:nth-child(1) { animation-delay: 0.05s; }
+.conteiner:nth-child(2) { animation-delay: 0.12s; }
+.conteiner:nth-child(3) { animation-delay: 0.19s; }
+.conteiner:nth-child(4) { animation-delay: 0.26s; }
+.conteiner:nth-child(5) { animation-delay: 0.33s; }
+.conteiner:nth-child(6) { animation-delay: 0.4s; }
+
+.basket { animation: fadeUp 0.6s var(--ease) 0.2s backwards; }
+@media (max-width: 1024px) {
+  .basket.basketOpen { animation: slideInRight 0.35s var(--ease) backwards; }
+}
+.overlay { animation: fadeIn 0.2s ease backwards; }
+.modal { animation: popIn 0.3s var(--ease) backwards; }
+
+/* для тих, кому рух шкодить */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,208 @@
+/* ==========================================================
+   products.css — картки як сторінки бестіарію: пергамент у темній
+   дерев'яній рамці, квадратна темна ілюстрація, червоні зірки.
+   Класи: .productL, .products-grid, .no-products, .conteiner,
+   .name, .rarity, .characteristics, .prise, .oldPrise,
+   .setConteiner, .setItems, .setItem
+   Порядок усередині картки задано через order (JSX не чіпаємо):
+   зображення → назва → тип → опис → рідкість → ціна → кнопка.
+   ========================================================== */
+
+/* .productL — сітка товарів: 1 колонка на телефоні, далі більше */
+.productL {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(13.5rem, 100%), 1fr));
+}
+
+/* .products-grid — сітка комплектів (Sets.jsx) */
+.products-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(19rem, 100%), 1fr));
+}
+
+/* .no-products — порожній список */
+.no-products {
+  padding: 2.25rem 1rem;
+  text-align: center;
+  font-style: italic;
+  color: var(--text-dim);
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--line);
+}
+
+/* .conteiner — картка: пергамент, потерті краї, дерев'яна рамка */
+.conteiner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.7rem 0.7rem 0.8rem;
+  color: var(--ink);
+  background:
+    var(--noise),
+    radial-gradient(circle at 18% 12%, rgba(90, 60, 25, 0.16), transparent 38%),
+    radial-gradient(circle at 88% 78%, rgba(70, 40, 15, 0.2), transparent 45%),
+    linear-gradient(170deg, var(--parchment-hi), var(--parchment) 45%, var(--parchment-lo));
+  border: 4px solid var(--wood);
+  border-radius: 2px;
+  box-shadow:
+    0 0 0 1px #0a0806,
+    inset 0 0 0 1px rgba(212, 197, 165, 0.18),
+    inset 0 0 26px rgba(60, 35, 12, 0.6),
+    0 8px 16px rgba(0, 0, 0, 0.6);
+  transition: transform 0.25s var(--ease), box-shadow 0.25s;
+}
+.conteiner:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 0 0 1px #0a0806,
+    inset 0 0 0 1px rgba(212, 197, 165, 0.18),
+    inset 0 0 26px rgba(60, 35, 12, 0.6),
+    0 12px 22px rgba(0, 0, 0, 0.7),
+    0 0 12px rgba(125, 33, 27, 0.35);
+}
+
+/* декоративні кутики навколо ілюстрації */
+.conteiner::before {
+  --c: rgba(200, 180, 135, 0.85);
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: calc(0.7rem + 6px);
+  left: calc(0.7rem + 6px);
+  right: calc(0.7rem + 6px);
+  aspect-ratio: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--c), var(--c)) left top / 14px 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) left top / 1px 14px no-repeat,
+    linear-gradient(var(--c), var(--c)) right top / 14px 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) right top / 1px 14px no-repeat,
+    linear-gradient(var(--c), var(--c)) left bottom / 14px 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) left bottom / 1px 14px no-repeat,
+    linear-gradient(var(--c), var(--c)) right bottom / 14px 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) right bottom / 1px 14px no-repeat;
+}
+
+/* ілюстрація: темна квадратна «гравюра» з тонкою внутрішньою рамкою */
+.conteiner > img {
+  order: 1;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  padding: 0.5rem;
+  background: radial-gradient(circle at 50% 38%, #2c241b, #0f0c0a 78%);
+  border: 2px solid #1c150f;
+  outline: 1px solid rgba(150, 125, 85, 0.45);
+  outline-offset: -5px;
+  box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.8);
+}
+
+/* .name — назва під зображенням */
+.name { order: 2; margin-top: 0.4rem; text-align: center; }
+.name h2 {
+  font-size: 1.12rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-shadow: 0 1px 0 rgba(255, 240, 205, 0.3);
+}
+
+/* тип / школа — менший текст */
+.conteiner h3 {
+  order: 3;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-style: italic;
+  font-size: 0.98rem;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+/* .characteristics — короткий опис, максимум 2 рядки */
+.characteristics {
+  order: 4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+/* .rarity — червоні зірки (або текст, якщо значення невідоме) */
+.rarity {
+  order: 5;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  line-height: 1.2;
+  letter-spacing: 0.18em;
+  text-align: center;
+  color: var(--red);
+}
+
+/* .prise — ціна з монетою */
+.prise {
+  order: 6;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-align: center;
+  color: var(--ink);
+}
+.prise::before {
+  content: "";
+  display: inline-block;
+  width: 0.75em;
+  height: 0.75em;
+  margin-right: 0.45em;
+  vertical-align: -0.05em;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #b9a36b, var(--gold-dim) 55%, #4b3d1e);
+  box-shadow: 0 0 0 1px #2a1d12;
+}
+
+.conteiner .buttonBuy { order: 7; margin-top: 0.45rem; }
+
+/* .oldPrise — стара ціна комплекту */
+.oldPrise {
+  order: 5;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+.oldPrise s { text-decoration-color: var(--red); text-decoration-thickness: 2px; }
+
+/* ---------- Комплекти ---------- */
+.setConteiner { gap: 0.55rem; }
+.setConteiner::before { display: none; }
+.setConteiner .name { margin-top: 0; }
+.setItems {
+  order: 3;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.45rem;
+}
+.setItem {
+  display: grid;
+  gap: 0.2rem;
+  align-content: start;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--ink);
+}
+.setItem img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  padding: 0.2rem;
+  background: radial-gradient(circle at 50% 38%, #2c241b, #0f0c0a 78%);
+  border: 1px solid #1c150f;
+  outline: 1px solid rgba(150, 125, 85, 0.4);
+  outline-offset: -3px;
+}
+.setItem p:last-child { font-family: var(--font-display); font-weight: 600; color: var(--ink-soft); }

@@ -1,0 +1,205 @@
+/* ==========================================================
+   filter.css — ліва панель: темне дерево, тонка потерта рамка.
+   Секції: Фільтри (заголовок) → Рідкість → Ціна → Сортування →
+   «Скинути всі». Навігація по категоріях — у шапці (header.css).
+   Класи: .filter, .filterHead, .filterLabel, .filterBody,
+   .filterSection, .radio, .priceRange, .slider, .sliderScale
+   ========================================================== */
+.filter {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  color: var(--text);
+  background:
+    var(--grain),
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.22) 0 1px, transparent 1px 11px),
+    linear-gradient(180deg, #2a1d14, #1a130e 60%, #150f0b);
+  border: 1px solid var(--line-hi);
+  border-radius: 2px;
+  box-shadow:
+    inset 0 0 0 3px #120d09,
+    inset 0 0 0 4px var(--line),
+    0 8px 18px rgba(0, 0, 0, 0.65);
+}
+
+/* .filterHead — табличка «Фільтри» (на малих екранах це кнопка згортання) */
+.filterHead {
+  padding: 0.85rem 1rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.14em;
+  text-align: center;
+  color: var(--text);
+  background: linear-gradient(180deg, rgba(212, 197, 165, 0.06), transparent);
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* підписи секцій: КАТЕГОРІЇ, РІДКІСТЬ, ЦІНА */
+.filterLabel {
+  display: block;
+  width: 100%;
+  padding: 0.8rem 1rem 0.45rem;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-align: center;
+  color: var(--text);
+}
+
+/* ---------- Тіло фільтра ---------- */
+.filterSection {
+  margin: 0;
+  padding: 0 0 0.7rem;
+  min-width: 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+/* .radio — рідкість: червона крапка в активному */
+.radio {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.28rem 1.1rem;
+  cursor: pointer;
+  color: var(--text);
+}
+.radio input {
+  appearance: none;
+  flex: none;
+  width: 1.05rem;
+  height: 1.05rem;
+  margin: 0;
+  background: #120e0b;
+  border: 1px solid #8a7a5e;
+  border-radius: 50%;
+}
+.radio input:checked {
+  background: radial-gradient(circle, var(--red-hi) 0 42%, #120e0b 46%);
+  border-color: var(--red-hi);
+}
+.radio:hover span { color: #ead9bb; }
+
+/* поля вводу й списки: темні, вдавлені */
+.priceRange {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  padding: 0 1rem;
+}
+.filter input[type="number"],
+.filter select {
+  width: 100%;
+  min-width: 0;
+  padding: 0.5rem 0.6rem;
+  color: var(--text);
+  background-color: #120e0b;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+  transition: border-color 0.2s;
+}
+.filter input[type="number"] { appearance: textfield; }
+.filter input[type="number"]::-webkit-outer-spin-button,
+.filter input[type="number"]::-webkit-inner-spin-button { appearance: none; margin: 0; }
+.filter input::placeholder { color: var(--text-dim); opacity: 1; }
+.filter input[type="number"]:hover,
+.filter select:hover { border-color: var(--red-hi); }
+
+.filter select {
+  appearance: none;
+  width: calc(100% - 2rem);
+  margin: 0 1rem;
+  padding-right: 2rem;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%23d4c5a5' stroke-width='2'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.7rem center;
+}
+.filter option { color: var(--text); background: #1b1510; }
+
+/* .slider — червоний повзунок із металевою кулькою (як у референсі) */
+.slider {
+  --fill: 100%;
+  appearance: none;
+  display: block;
+  width: calc(100% - 2rem);
+  height: 1.4rem;
+  margin: 0.7rem 1rem 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.slider::-webkit-slider-runnable-track {
+  height: 4px;
+  background: linear-gradient(90deg, var(--red-hi) var(--fill), #3a2e24 var(--fill));
+  border: 1px solid #0a0806;
+}
+.slider::-moz-range-track {
+  height: 4px;
+  background: linear-gradient(90deg, var(--red-hi) var(--fill), #3a2e24 var(--fill));
+  border: 1px solid #0a0806;
+}
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: -7px;
+  background: radial-gradient(circle at 35% 30%, #d8c9a4, #8a7440 55%, #4b3d1e);
+  border: 1px solid #0a0806;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+.slider::-moz-range-thumb {
+  width: 1rem;
+  height: 1rem;
+  background: radial-gradient(circle at 35% 30%, #d8c9a4, #8a7440 55%, #4b3d1e);
+  border: 1px solid #0a0806;
+  border-radius: 50%;
+}
+.sliderScale {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.1rem 1.1rem 0;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+/* «Скинути всі» */
+.filter .buttonCancel {
+  width: calc(100% - 2rem);
+  margin: 0.4rem 1rem 1rem;
+}
+
+/* ---------- Планшет / телефон ≤1024px ----------
+   Панель згортається: видно лише табличку «Фільтри» зі стрілкою. */
+@media (max-width: 1024px) {
+  .filterBody { display: none; }
+  .filterOpen .filterBody { display: block; }
+  .filterOpen .filterHead { border-bottom: 1px solid var(--line); }
+
+  .filterHead {
+    position: relative;
+    cursor: pointer;
+    pointer-events: auto;
+    border-bottom: 0;
+  }
+  .filterHead::after {
+    content: "";
+    position: absolute;
+    right: 1.1rem;
+    top: 50%;
+    width: 0.55rem;
+    height: 0.55rem;
+    margin-top: -0.4rem;
+    border-right: 2px solid var(--text);
+    border-bottom: 2px solid var(--text);
+    transform: rotate(45deg);
+    transition: transform 0.2s;
+  }
+  .filterOpen .filterHead::after { transform: rotate(-135deg); margin-top: -0.15rem; }
+  .filterHead:hover { background: rgba(125, 33, 27, 0.2); }
+}

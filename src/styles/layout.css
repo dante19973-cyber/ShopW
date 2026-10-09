@@ -1,9 +1,22 @@
 /* ==========================================================
    layout.css — main, .Category (сторінка категорії)
-   Від 1025px: фільтр | товари | кошик. Нижче: одна колонка.
+   Від 768px: фільтр | товари. Кошик — окремо (не в сітці).
    ========================================================== */
 
-/* main — діти: hero, .Category, .basket */
+:root {
+  --header-h: 10.7rem;
+  --filter-h: 37rem;
+  --toggle-top: 1.9rem;
+}
+@media (min-width: 1280px) {
+  :root { --header-h: 7.2rem; --toggle-top: 2.1rem; }
+}
+@media (max-width: 767px) {
+  :root { --header-h: 6.75rem; }
+}
+html { scroll-padding-top: var(--header-h); }
+
+/* main */
 main {
   flex: 1;
   display: grid;
@@ -16,7 +29,6 @@ main {
   padding: var(--main-pad);
 }
 
-/* «Loading...» і повідомлення про помилку */
 main > p {
   padding: 4rem 1rem;
   text-align: center;
@@ -24,14 +36,14 @@ main > p {
   color: var(--text-dim);
 }
 
-/* .Category — h1 + .filter + список */
+/* .Category */
 .Category {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 1.25rem;
 }
 
-/* .Category > h1 — заголовок сторінки з червоною лінією */
+/* Заголовок категорії */
 .Category > h1 {
   display: flex;
   flex-direction: column;
@@ -59,15 +71,15 @@ main > p {
   transform: rotate(45deg);
 }
 
-/* Телефон / планшет: місце знизу, щоб кнопка кошика не закривала товари */
-@media (max-width: 1024px) {
+/* Мобільний */
+@media (max-width: 767px) {
   main { padding-bottom: calc(var(--main-pad) + 3.5rem); }
 }
 
-/* Десктоп: .Category «розчиняється», її діти стають колонками main */
-@media (min-width: 1025px) {
+/* ========== Від 768px: 2 колонки (фільтр + товари) ========== */
+@media (min-width: 769px) {
   main {
-    grid-template-columns: 15.5rem minmax(0, 1fr) 19rem;
+    grid-template-columns: 16rem minmax(0, 1fr);   /* ← тільки 2 колонки */
     column-gap: 1.75rem;
   }
 
@@ -75,17 +87,27 @@ main > p {
 
   .hero,
   main > p,
-  .Category > h1 { grid-column: 1 / -1; }
-  .Category > h1 { margin-bottom: 1.25rem; }
+  .Category > h1 {
+    grid-column: 1 / -1;
+  }
+  .Category > h1 {
+    margin-bottom: 1.25rem;
+  }
 
+  /* Фільтр — завжди відкритий і sticky */
   .Category > .filter {
     grid-column: 1;
     position: sticky;
-    top: 1.25rem;
-    max-height: calc(100vh - 2.5rem);
+    top: calc(var(--header-h) + 1.5rem);
+    max-height: calc(100vh - var(--header-h) - 2rem);
     overflow-y: auto;
+    /* прибираємо стан "згорнутий" якщо він є */
   }
+
+  /* Товари займають всю решту місця */
   .Category > .productL,
   .Category > .products-grid,
-  .Category > .no-products { grid-column: 2; }
+  .Category > .no-products {
+    grid-column: 2;
+  }
 }

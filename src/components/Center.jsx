@@ -13,12 +13,12 @@ function Center(){
     return(
             <BrowserRouter>
                 <header>
-                    <h1>Oll For Hunter</h1>
+                    <h1><img className="logo" src="../../public/logo.webp" alt="logo" w />Oll For Hunter</h1>
                 <nav>
                    <ul className="nav">
                        <li><NavLink to="/">Home</NavLink></li>
                        <li><NavLink to="/SilverS">Silver Sword</NavLink></li>
-                       <li><NavLink to="/MetalS">Metal Sword</NavLink></li>
+                       <li><NavLink to="/MetalS">Steel Sword</NavLink></li>
                        <li><NavLink to="/Armors">Armors</NavLink></li>
                        <li><NavLink to="/Boots">Boots</NavLink></li>
                        <li><NavLink to="/Gauntlets">Gauntlets</NavLink></li>

@@ -1,12 +1,12 @@
 /* ==========================================================
-   header.css — темна дерев'яна панель: логотип і назва зліва,
+   header.css — темна дерев'яна панель: логотип + назва зліва,
    навігація по категоріях (.nav), «Кошик (N)» справа (.basketToggle).
-   До 1279px навігація стоїть другим рядком, від 1280px — в одному
-   рядку з логотипом.
-   Класи: header, header h1, header nav, .nav, .nav a, .active
    ========================================================== */
+
 header {
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 70;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 0.9rem;
@@ -14,59 +14,61 @@ header {
   padding: 0.9rem 1rem 1rem;
   background-color: var(--wood-lo);
   background-image:
-    var(--grain),
-    repeating-linear-gradient(91deg, rgba(0, 0, 0, 0.32) 0 1px, transparent 1px 12px),
-    repeating-linear-gradient(89deg, rgba(212, 197, 165, 0.03) 0 2px, transparent 2px 19px),
-    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0 2px, transparent 2px 220px),
-    linear-gradient(180deg, #2b1e15, #1a130e 70%, #120d09);
+          var(--grain),
+          repeating-linear-gradient(91deg, rgba(0, 0, 0, 0.32) 0 1px, transparent 1px 12px),
+          repeating-linear-gradient(89deg, rgba(212, 197, 165, 0.03) 0 2px, transparent 2px 19px),
+          repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0 2px, transparent 2px 220px),
+          linear-gradient(180deg, #2b1e15, #1a130e 70%, #120d09);
   border-bottom: 3px solid #0a0806;
   box-shadow:
-    inset 0 -1px 0 var(--line-hi),
-    inset 0 1px 0 rgba(212, 197, 165, 0.08),
-    0 8px 20px rgba(0, 0, 0, 0.7);
+          inset 0 -1px 0 var(--line-hi),
+          inset 0 1px 0 rgba(212, 197, 165, 0.08),
+          0 8px 20px rgba(0, 0, 0, 0.7);
 }
 
-/* header h1 — медальйон + назва + червона лінія з ромбом */
+/* ========== Логотип + назва ========== */
 header h1 {
   display: inline-grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  column-gap: 0.9rem;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.85rem;
   align-items: center;
   justify-self: start;
-  max-width: 17rem;
+  max-width: 22rem;
   padding-right: 6.5rem;               /* місце під кнопку кошика на малих екранах */
   font-family: var(--font-title);
   font-weight: 400;
-  font-size: clamp(1.4rem, 5vw, 2.1rem);
+  font-size: clamp(1.35rem, 4.8vw, 2.1rem);
   line-height: 1.05;
   letter-spacing: 0.04em;
   text-wrap: balance;
   color: var(--text);
   text-shadow: 0 2px 0 #000;
 }
-header h1::before {
-  content: "";
-  grid-row: span 2;
+
+/* сам логотип */
+.logo {
   width: 3.4rem;
   height: 3.4rem;
-  background: var(--medallion) center / contain no-repeat;
+  object-fit: contain;
   filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.8));
+  flex-shrink: 0;
 }
+
+/* червона лінія з ромбом під назвою */
 header h1::after {
   content: "";
   grid-column: 2;
-  align-self: start;
   height: 9px;
-  margin-top: 0.35rem;
+  margin-top: 0.3rem;
   background: linear-gradient(90deg, transparent, var(--red-hi) 18%, var(--red-hi) 82%, transparent);
   clip-path: polygon(
-    0 calc(50% - 0.5px), 45% calc(50% - 0.5px), 50% 0, 55% calc(50% - 0.5px),
-    100% calc(50% - 0.5px), 100% calc(50% + 0.5px), 55% calc(50% + 0.5px),
-    50% 100%, 45% calc(50% + 0.5px), 0 calc(50% + 0.5px)
+          0 calc(50% - 0.5px), 45% calc(50% - 0.5px), 50% 0, 55% calc(50% - 0.5px),
+          100% calc(50% - 0.5px), 100% calc(50% + 0.5px), 55% calc(50% + 0.5px),
+          50% 100%, 45% calc(50% + 0.5px), 0 calc(50% + 0.5px)
   );
 }
 
-/* header nav / .nav — меню категорій: на телефоні гортається вбік */
+/* ========== Навігація ========== */
 .nav {
   display: flex;
   gap: 0.15rem;
@@ -94,7 +96,6 @@ header h1::after {
   color: #ead9bb;
   background: rgba(125, 33, 27, 0.25);
 }
-/* активний пункт — бордовий, як було заплановано в референсі */
 .nav a.active {
   color: #ead9bb;
   background: linear-gradient(180deg, var(--red), var(--red-dark));
@@ -102,29 +103,99 @@ header h1::after {
   box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.4);
 }
 
-@media (max-width: 767px) {
-  /* затухання справа підказує, що меню гортається */
-  .nav { mask-image: linear-gradient(90deg, #000 88%, transparent); }
+/* ========== Адаптив ========== */
+
+/* Телефони і маленькі планшети */
+@media (max-width: 1024px) {
+  header {
+    gap: 0.35rem;
+    padding: 0.5rem 1rem 0.4rem;
+  }
+  header h1 {
+    font-size: 1.2rem;
+    padding-right: 6.5rem;
+    max-width: 16rem;
+  }
+  .logo {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+  header h1::after {
+    margin-top: 0.2rem;
+  }
+  .nav {
+    mask-image: linear-gradient(90deg, #000 88%, transparent);
+  }
+  .nav a {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
 }
 
-/* Від 768px: шапка трохи ширша, меню по центру й переноситься */
-@media (min-width: 768px) {
-  header { padding: 1rem 2rem 0.7rem; }
-  header h1 { padding-right: 0; }
-  .nav { flex-wrap: wrap; justify-content: center; overflow: visible; }
-  .nav li + li { border-left: 1px solid rgba(183, 162, 125, 0.16); }
+/* Планшети */
+@media (min-width: 768px) and (max-width: 1024px) {
+  header {
+    padding-inline: 2rem;
+  }
+  header h1 {
+    padding-right: 0;
+  }
 }
 
+/* Десктоп середній */
 @media (min-width: 1025px) {
-  header h1::before { width: 4.4rem; height: 4.4rem; }
+  header {
+    padding: 0.7rem 2rem 0.5rem;
+  }
+  header h1 {
+    padding-right: 0;
+  }
+  .nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: visible;
+  }
+  .nav li + li {
+    border-left: 1px solid rgba(183, 162, 125, 0.16);
+  }
+  .logo {
+    width: 3.4rem;
+    height: 3.4rem;
+  }
 }
 
-/* Від 1280px: логотип і меню в одному рядку, праворуч місце під «Кошик» */
+/* Великий десктоп — лого + меню в одному рядку */
 @media (min-width: 1280px) {
   header {
-    grid-template-columns: max-content minmax(0, 1fr);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;   /* ліва | центр | права */
+    align-items: center;
     column-gap: 2rem;
-    padding: 1rem 10rem 1rem 2rem;
+    padding: 0.8rem 2rem;
   }
-  .nav { border-top: 0; }
+
+  /* логотип + назва зліва */
+  header h1 {
+    justify-self: start;
+    grid-column: 1;
+  }
+
+  /* меню строго по центру */
+  .nav {
+    grid-column: 2;
+    justify-self: center;
+    border-top: 0;
+    margin: 0;
+  }
+
+  /* кошик справа */
+  .basketToggle {
+    grid-column: 3;
+    justify-self: end;
+  }
+
+  .logo {
+    width: 4.2rem;
+    height: 4.2rem;
+  }
 }

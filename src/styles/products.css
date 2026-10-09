@@ -8,11 +8,18 @@
    зображення → назва → тип → опис → рідкість → ціна → кнопка.
    ========================================================== */
 
-/* .productL — сітка товарів: 1 колонка на телефоні, далі більше */
+/* Розміри картки: легко підлаштувати під смак */
+:root {
+  --card-pad: 0.55rem;     /* внутрішній відступ картки */
+  --img-k: 0.75;           /* зображення = 75% ширини картки (було 100%, тобто -25%) */
+  --desc-lines: 3;         /* скільки рядків опису показувати */
+}
+
+/* .productL — сітка товарів: комірки вужчі, на десктопі 1440px це 4 в ряд */
 .productL {
   display: grid;
-  gap: 1.25rem;
-  grid-template-columns: repeat(auto-fill, minmax(min(13.5rem, 100%), 1fr));
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(9.5rem, 100%), 1fr));
 }
 
 /* .products-grid — сітка комплектів (Sets.jsx) */
@@ -38,20 +45,20 @@
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  padding: 0.7rem 0.7rem 0.8rem;
+  padding: var(--card-pad);
   color: var(--ink);
   background:
     var(--noise),
     radial-gradient(circle at 18% 12%, rgba(90, 60, 25, 0.16), transparent 38%),
     radial-gradient(circle at 88% 78%, rgba(70, 40, 15, 0.2), transparent 45%),
     linear-gradient(170deg, var(--parchment-hi), var(--parchment) 45%, var(--parchment-lo));
-  border: 4px solid var(--wood);
+  border: 3px solid var(--wood);
   border-radius: 2px;
   box-shadow:
     0 0 0 1px #0a0806,
     inset 0 0 0 1px rgba(212, 197, 165, 0.18),
-    inset 0 0 26px rgba(60, 35, 12, 0.6),
-    0 8px 16px rgba(0, 0, 0, 0.6);
+    inset 0 0 22px rgba(60, 35, 12, 0.6),
+    0 6px 14px rgba(0, 0, 0, 0.6);
   transition: transform 0.25s var(--ease), box-shadow 0.25s;
 }
 .conteiner:hover {
@@ -59,52 +66,55 @@
   box-shadow:
     0 0 0 1px #0a0806,
     inset 0 0 0 1px rgba(212, 197, 165, 0.18),
-    inset 0 0 26px rgba(60, 35, 12, 0.6),
-    0 12px 22px rgba(0, 0, 0, 0.7),
+    inset 0 0 22px rgba(60, 35, 12, 0.6),
+    0 10px 20px rgba(0, 0, 0, 0.7),
     0 0 12px rgba(125, 33, 27, 0.35);
 }
 
-/* декоративні кутики навколо ілюстрації */
+/* декоративні кутики навколо ілюстрації (рахуються від розміру зображення) */
 .conteiner::before {
   --c: rgba(200, 180, 135, 0.85);
+  --inset: 4px;
   content: "";
   position: absolute;
   z-index: 1;
-  top: calc(0.7rem + 6px);
-  left: calc(0.7rem + 6px);
-  right: calc(0.7rem + 6px);
+  top: calc(var(--card-pad) + var(--inset));
+  left: calc((1 - var(--img-k)) * 50% + var(--img-k) * var(--card-pad) + var(--inset));
+  right: calc((1 - var(--img-k)) * 50% + var(--img-k) * var(--card-pad) + var(--inset));
   aspect-ratio: 1;
   pointer-events: none;
   background:
-    linear-gradient(var(--c), var(--c)) left top / 14px 1px no-repeat,
-    linear-gradient(var(--c), var(--c)) left top / 1px 14px no-repeat,
-    linear-gradient(var(--c), var(--c)) right top / 14px 1px no-repeat,
-    linear-gradient(var(--c), var(--c)) right top / 1px 14px no-repeat,
-    linear-gradient(var(--c), var(--c)) left bottom / 14px 1px no-repeat,
-    linear-gradient(var(--c), var(--c)) left bottom / 1px 14px no-repeat,
-    linear-gradient(var(--c), var(--c)) right bottom / 14px 1px no-repeat,
-    linear-gradient(var(--c), var(--c)) right bottom / 1px 14px no-repeat;
+    linear-gradient(var(--c), var(--c)) left top / 10px 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) left top / 1px 10px no-repeat,
+    linear-gradient(var(--c), var(--c)) right top / 10px 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) right top / 1px 10px no-repeat,
+    linear-gradient(var(--c), var(--c)) left bottom / 10px 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) left bottom / 1px 10px no-repeat,
+    linear-gradient(var(--c), var(--c)) right bottom / 10px 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) right bottom / 1px 10px no-repeat;
 }
 
-/* ілюстрація: темна квадратна «гравюра» з тонкою внутрішньою рамкою */
+/* ілюстрація: темна квадратна «гравюра», 75% ширини картки, по центру */
 .conteiner > img {
   order: 1;
-  width: 100%;
+  width: calc(var(--img-k) * 100%);
+  margin-inline: auto;
   aspect-ratio: 1;
   object-fit: contain;
-  padding: 0.5rem;
+  padding: 0.3rem;
   background: radial-gradient(circle at 50% 38%, #2c241b, #0f0c0a 78%);
   border: 2px solid #1c150f;
   outline: 1px solid rgba(150, 125, 85, 0.45);
-  outline-offset: -5px;
-  box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.8);
+  outline-offset: -4px;
+  box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.8);
 }
 
 /* .name — назва під зображенням */
-.name { order: 2; margin-top: 0.4rem; text-align: center; }
+.name { order: 2; margin-top: 0.3rem; text-align: center; }
 .name h2 {
-  font-size: 1.12rem;
-  letter-spacing: 0.02em;
+  font-size: 0.95rem;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
   color: var(--ink);
   text-shadow: 0 1px 0 rgba(255, 240, 205, 0.3);
 }
@@ -115,20 +125,21 @@
   font-family: var(--font-body);
   font-weight: 500;
   font-style: italic;
-  font-size: 0.98rem;
+  font-size: 0.88rem;
+  line-height: 1.25;
   text-align: center;
   color: var(--ink-soft);
 }
 
-/* .characteristics — короткий опис, максимум 2 рядки */
+/* .characteristics — короткий опис */
 .characteristics {
   order: 4;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: var(--desc-lines);
   -webkit-box-orient: vertical;
   overflow: hidden;
-  font-size: 0.9rem;
-  line-height: 1.35;
+  font-size: 0.8rem;
+  line-height: 1.3;
   text-align: center;
   color: var(--ink-soft);
 }
@@ -137,9 +148,9 @@
 .rarity {
   order: 5;
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   line-height: 1.2;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-align: center;
   color: var(--red);
 }
@@ -147,25 +158,45 @@
 /* .prise — ціна з монетою */
 .prise {
   order: 6;
+  margin-bottom: 0.35rem;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1rem;
   text-align: center;
   color: var(--ink);
 }
 .prise::before {
   content: "";
   display: inline-block;
-  width: 0.75em;
-  height: 0.75em;
-  margin-right: 0.45em;
+  width: 0.7em;
+  height: 0.7em;
+  margin-right: 0.4em;
   vertical-align: -0.05em;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #b9a36b, var(--gold-dim) 55%, #4b3d1e);
   box-shadow: 0 0 0 1px #2a1d12;
 }
 
-.conteiner .buttonBuy { order: 7; margin-top: 0.45rem; }
+/* кнопка завжди внизу картки; на малих комірках трохи компактніша */
+.conteiner .buttonBuy {
+  order: 7;
+  margin-top: auto;
+  padding: 0.5rem 0.4rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
+/* Вирівнювання рядків між картками (subgrid): назви, описи, зірки, ціни й
+   кнопки стоять на одній висоті в усьому ряду, навіть якщо текст різної довжини.
+   Старі браузери без subgrid лишаються на flex-версії вище (кнопка внизу). */
+@supports (grid-template-rows: subgrid) {
+  .productL > .conteiner {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 7;
+    row-gap: 0.3rem;
+  }
+}
 
 /* .oldPrise — стара ціна комплекту */
 .oldPrise {
@@ -177,7 +208,7 @@
 .oldPrise s { text-decoration-color: var(--red); text-decoration-thickness: 2px; }
 
 /* ---------- Комплекти ---------- */
-.setConteiner { gap: 0.55rem; }
+.setConteiner { gap: 0.55rem; padding: 0.7rem; }
 .setConteiner::before { display: none; }
 .setConteiner .name { margin-top: 0; }
 .setItems {
@@ -206,3 +237,8 @@
   outline-offset: -3px;
 }
 .setItem p:last-child { font-family: var(--font-display); font-weight: 600; color: var(--ink-soft); }
+@media (max-width: 479px) {
+  .productL {
+    grid-template-columns: repeat(auto-fill, minmax(min(8.5rem, 100%), 1fr));
+  }
+}

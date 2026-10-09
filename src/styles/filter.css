@@ -176,7 +176,7 @@
 
 /* ---------- Планшет / телефон ≤1024px ----------
    Панель згортається: видно лише табличку «Фільтри» зі стрілкою. */
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .filterBody { display: none; }
   .filterOpen .filterBody { display: block; }
   .filterOpen .filterHead { border-bottom: 1px solid var(--line); }

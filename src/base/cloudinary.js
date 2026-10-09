@@ -1,7 +1,7 @@
 export function cldImg(img, width = 400) {
     if (!img) return '';
 
-    const transform = `f_auto,q_auto,w_${width}`;
+    const transform = `f_auto,q_auto,c_limit,w_${width}`;
 
     // У базі лежить повний URL: додаємо трансформацію після /upload/
     if (img.startsWith('http')) {

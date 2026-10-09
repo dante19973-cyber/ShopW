@@ -219,14 +219,15 @@
 
 /* ---------- від 1025px: права колонка ---------- */
 @media (min-width: 1025px) {
-  /* кнопка стає частиною шапки і прокручується разом зі сторінкою */
-  .basketToggle { position: absolute; top: 1.6rem; right: 2rem; z-index: 2; }
+  /* шапка липка, тому кнопка теж фіксована: стоїть у шапці при будь-якому скролі */
+  .basketToggle { position: fixed; top: var(--toggle-top); right: 2rem; z-index: 80; }
   .basketClose { display: none; }
 
+  /* максимальна висота кошика = висота фільтра; довший список гортається всередині */
   .basket {
     grid-column: 3;
     position: sticky;
-    top: 1.25rem;
-    max-height: calc(100vh - 2.5rem);
+    top: calc(var(--header-h) + 3rem);
+    max-height: min(var(--filter-h), calc(100vh - var(--header-h) - 2rem));
   }
 }

@@ -25,7 +25,7 @@ function MetalS (){
     if (error) return <p>Something went wrong</p>
     return(
         <div className="Category">
-            <h1>Metal Sword</h1>
+            <h1>Steel Sword</h1>
             <Filter filters={filters} onChange={setFilters}/>
             <List products={sortedP} />
         </div>

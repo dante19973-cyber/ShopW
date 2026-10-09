@@ -50,7 +50,4 @@
   /* Дуже слабке зерно: світле для дерева, темне для пергаменту */
   --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .85  0 0 0 0 .72  0 0 0 0 .5  0 0 0 .07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   --noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .16  0 0 0 0 .1  0 0 0 0 .04  0 0 0 .32 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-
-  /* Медальйон-вовк: сталь і червоні очі */
-  --medallion: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%231a1512' stroke='%23857d70' stroke-width='3'/><circle cx='32' cy='32' r='25' fill='none' stroke='%234a443b' stroke-width='1.4'/><path d='M14 14 25 26H39L50 14 49 36 38 51 32 56 26 51 15 36Z' fill='%23a8a398'/><path d='M22 33 29 35.5M42 33 35 35.5' stroke='%23a3231c' stroke-width='3' stroke-linecap='round'/></svg>");
 }

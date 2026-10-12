@@ -1,10 +1,10 @@
-import {useState} from 'react';
+import useStore from '../../hooks/useStore';
 import Filter from '../../components/Filter'
 import List from '../../components/List';
 import useProd from '../../hooks/useProd';
 function MetalS (){
     const { products, loading, error } = useProd('MetalS');
-    const [filters, setFilters]=useState({
+    const [filters, setFilters]=useStore('filters:SteelSword',{
         priseF:'',
         priseT:'',
         rarity:'',

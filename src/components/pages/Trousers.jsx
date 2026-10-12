@@ -1,10 +1,10 @@
-import {useState} from 'react';
+import useStore from '../../hooks/useStore';
 import Filter from '../../components/Filter'
 import List from '../../components/List';
 import useProd from '../../hooks/useProd';
 function Trousers (){
     const { products, loading, error } = useProd('Trousers');
-    const [filters, setFilters]=useState({
+    const [filters, setFilters]=useStore('filters:Trousers',{
         priseF:'',
         priseT:'',
         rarity:'',

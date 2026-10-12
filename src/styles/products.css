@@ -15,11 +15,28 @@
   --desc-lines: 3;         /* скільки рядків опису показувати */
 }
 
-/* .productL — сітка товарів: комірки вужчі, на десктопі 1440px це 4 в ряд */
+/* .productL — сітка товарів.
+   Комірка не вужча за --cell-min, а колонок не більше --cols-max:
+   мінімальна ширина = більше з (--cell-min, чверть ширини контейнера).
+   Тому на широких екранах (1440px і більше) завжди рівно 4 в ряд,
+   а на вузьких їх стає менше. */
 .productL {
+  --gap: 1rem;
+  --cell-min: 9.5rem;      /* найвужча комірка */
+  --cols-max: 4;           /* максимум колонок у ряду */
   display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(min(9.5rem, 100%), 1fr));
+  gap: var(--gap);
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(
+      max(var(--cell-min), calc((100% - (var(--cols-max) - 1) * var(--gap)) / var(--cols-max))),
+      1fr
+    )
+  );
+}
+/* на вузьких телефонах комірка трохи менша, щоб лишалось 2 в ряд */
+@media (max-width: 479px) {
+  .productL { --cell-min: 8.5rem; }
 }
 
 /* .products-grid — сітка комплектів (Sets.jsx) */
@@ -237,8 +254,3 @@
   outline-offset: -3px;
 }
 .setItem p:last-child { font-family: var(--font-display); font-weight: 600; color: var(--ink-soft); }
-@media (max-width: 479px) {
-  .productL {
-    grid-template-columns: repeat(auto-fill, minmax(min(8.5rem, 100%), 1fr));
-  }
-}

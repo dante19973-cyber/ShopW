@@ -13,7 +13,7 @@ function Center(){
     return(
             <BrowserRouter>
                 <header>
-                    <h1><img className="logo" src="../../public/logo.webp" alt="logo" w />Oll For Hunter</h1>
+                    <h1><img className="logo" src="./logo.webp" alt="logo" />Oll For Hunter</h1>
                 <nav>
                    <ul className="nav">
                        <li><NavLink to="/">Home</NavLink></li>

@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import useStore from '../../hooks/useStore';
 import Filter from '../../components/Filter';
 import SetCont, { getSetPrice } from '../../components/SetCont';
 import useProd from '../../hooks/useProd';
 function Sets() {
     const { products, loading, error } = useProd();
-    const [filters, setFilters] = useState({
+    const [filters, setFilters] = useStore('filters:Sets',{
         priseF: '',
         priseT: '',
         rarity: '',

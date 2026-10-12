@@ -1,4 +1,5 @@
 import React from 'react'
+import RouteM from './RouteM';
 import {BrowserRouter, Routes, Route,NavLink} from 'react-router-dom'
 import Home from './pages/Home';
 import SilverS from './pages/SilverS';
@@ -12,6 +13,7 @@ import Basket from "./Basket.jsx";
 function Center(){
     return(
             <BrowserRouter>
+                <RouteM/>
                 <header>
                     <h1><img className="logo" src="./logo.webp" alt="logo" />Oll For Hunter</h1>
                 <nav>

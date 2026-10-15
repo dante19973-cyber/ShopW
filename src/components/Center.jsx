@@ -15,7 +15,7 @@ function Center(){
             <BrowserRouter>
                 <RouteM/>
                 <header>
-                    <h1><img className="logo" src="./logo.webp" alt="logo" />Oll For Hunter</h1>
+                    <h1><img className="logo" src="./logo.webp" alt="logo" />All For Hunter</h1>
                 <nav>
                    <ul className="nav">
                        <li><NavLink to="/">Home</NavLink></li>
@@ -44,7 +44,7 @@ function Center(){
                 </main>
                 <footer className="footer">
                     <p className="footerRunes" aria-hidden="true">ᚠ ᚢ ᚦ ᚨ ᚱ ᚲ</p>
-                    <p className="footerText">© 1272 рік</p>
+                    <p className="footerText">© 1272 year</p>
                 </footer>
             </BrowserRouter>
     )
